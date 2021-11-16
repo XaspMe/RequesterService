@@ -45,6 +45,14 @@ namespace RequesterService.Controllers
             return Ok(new { status = scopedProcessingService.GetServiceStatus() });
         }
 
+        [HttpPost("RunLongCompletion")]
+        public ActionResult CreateLongCompletion([FromQuery] int millisecondsdelay, [FromServices] ConcreteRequesterLongCompletionExample longCompletionExample)
+        {
+            requesterStrategyContext.SetStrategy(longCompletionExample);
+            scopedProcessingService.Run(requesterStrategyContext.DoSomeBusinessLogic(), millisecondsdelay);
+            return Ok(new { status = scopedProcessingService.GetServiceStatus() });
+        }
+
 
         [HttpPost("Cancel")]
         public ActionResult CancelWork()

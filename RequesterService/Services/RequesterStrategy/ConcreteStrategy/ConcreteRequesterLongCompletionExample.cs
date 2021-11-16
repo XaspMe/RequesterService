@@ -10,6 +10,12 @@ namespace RequesterService.Services.RequesterStrategy.ConcreteStrategy
     {
         readonly ILogger<ConcreteRequesterLongCompletionExample> logger;
 
+        public ConcreteRequesterLongCompletionExample(ILogger<ConcreteRequesterLongCompletionExample> logger)
+        {
+            this.logger = logger;
+        }
+
+
         public Action DoSomeAction()
         {
             return new Action(() => LongCompletionExample());
@@ -19,7 +25,7 @@ namespace RequesterService.Services.RequesterStrategy.ConcreteStrategy
         {
             logger.LogInformation("LongCompletion started");
             Task.Delay(30000).Wait();
-            logger.LogInformation("LongCompletion finished in ");
+            logger.LogInformation("LongCompletion finished");
         }
     }
 }

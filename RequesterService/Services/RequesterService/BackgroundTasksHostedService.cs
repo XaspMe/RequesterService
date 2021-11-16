@@ -22,7 +22,6 @@ namespace RequesterService.Services.RequesterService
         CancellationTokenSource cancelSource;
         CancellationToken stoppingToken;
         private Task Runner;
-        private static System.Timers.Timer aTimer;
 
         public string GetServiceStatus()
         {
