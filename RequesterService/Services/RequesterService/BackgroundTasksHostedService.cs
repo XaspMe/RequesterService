@@ -43,6 +43,9 @@ namespace RequesterService.Services.RequesterService
 
         private async Task taskToRunAsync(Action action, int millisecondsdelay)
         {
+            millisecondsdelay = millisecondsdelay > 1000 ? millisecondsdelay : 1000;
+
+
             cts = new CancellationTokenSource();
             ct = cts.Token;
             logger.LogInformation($"Worker launched");
