@@ -1,5 +1,6 @@
 # RequesterService
-The application allows you to perform any actions at a given rhythm.
+The application allows you to perform any network action with the required delay.
+Application present .NET5 WebApi with Swagger and SEQ system in docker.
 
 To run application:
 1) Run docker-compose from app root. 
