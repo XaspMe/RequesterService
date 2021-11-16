@@ -5,7 +5,7 @@ Application present .NET5 WebApi with Swagger and SEQ system in docker.
 To run application:
 1) Run docker-compose from app root. 
 
-It's load SEQ system for log collection and all required source files on http://localhost:1441/#/events 
+It's load SEQ system for log collection on http://localhost:1441/#/events 
 
 You can change external SEQ port in docker-compose.yml
 
