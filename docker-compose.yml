@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  seq:
+    image: datalust/seq
+    environment:
+      ACCEPT_EULA: Y
+    ports:
+      - 1488:80
+    
+  requesterservice:
+    image: ${DOCKER_REGISTRY-}requesterservice
+    build:
+      context: .
+      dockerfile: RequesterService/Dockerfile
+    depends_on:
+      - seq
