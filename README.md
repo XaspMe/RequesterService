@@ -5,10 +5,12 @@ To run application:
 1) Run docker-compose from app root. 
 
 It's load SEQ system for log collection and all required source files on http://localhost:1441/#/events 
-Every time you can change external SEQ port in docker-compose.yml
-By default application open SwaggerUI in your default browser. Swagger countain russian comments
 
-Creation of recurring tasks requires the creation of a new worker:
+You can change external SEQ port in docker-compose.yml
+
+By default application open SwaggerUI in your default browser. Swagger contain russian comments
+
+Creation of recurring tasks requires the creation of a new action:
 1) Create a "concretestrategy" and inherite it from IRequestStrategy.
 2) Pass your strategy to the DI using StrategiesServiceExtesion.
 3) Use your new strategy from DI with RequesterStrategyContext.
