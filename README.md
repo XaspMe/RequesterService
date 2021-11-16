@@ -20,6 +20,6 @@ Creation of recurring tasks requires the creation of a new action:
 All examples of creating new actions countains in existing controllers.
 
 Using:
-1) POST /api/Requester/RunGet or /api/Requester/RunPost - for creating new recurrenced task. And do not forget to set dalay between iterations with body of request.
+1) POST /api/Requester/RunGet or /api/Requester/RunPost - for creating new recurrenced task. And do not forget to set dalay between iterations with body of request (Limit 1000ms).
 2) Use POST /api/Requester/Cancel - for canceling.
 3) Use GET /api/Requester/Status - for current status of worker service.
