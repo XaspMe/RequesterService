@@ -28,6 +28,12 @@ namespace RequesterService.Controllers
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Создать простой запрос (условный GET)
+        /// </summary>
+        /// <param name="millisecondsdelay"></param>
+        /// <param name="strategyGet"></param>
+        /// <returns></returns>
         [HttpPost("RunGet")]
         public ActionResult CreateGetRequestAndRun([FromQuery] int millisecondsdelay, [FromServices] ConcreteRequesterStrategyGet strategyGet)
         {
@@ -36,7 +42,12 @@ namespace RequesterService.Controllers
             return Ok(new { status = scopedProcessingService.GetServiceStatus() });
         }
 
-
+        /// <summary>
+        /// Создать простой запрос (условный POST)
+        /// </summary>
+        /// <param name="millisecondsdelay"></param>
+        /// <param name="strategyPost"></param>
+        /// <returns></returns>
         [HttpPost("RunPost")]
         public ActionResult CreatePostRequestAndRun([FromQuery] int millisecondsdelay, [FromServices] ConcreteRequesterStrategyPost strategyPost)
         {
@@ -45,15 +56,10 @@ namespace RequesterService.Controllers
             return Ok(new { status = scopedProcessingService.GetServiceStatus() });
         }
 
-        [HttpPost("RunLongCompletion")]
-        public ActionResult CreateLongCompletion([FromQuery] int millisecondsdelay, [FromServices] ConcreteRequesterLongCompletionExample longCompletionExample)
-        {
-            requesterStrategyContext.SetStrategy(longCompletionExample);
-            scopedProcessingService.Run(requesterStrategyContext.DoSomeBusinessLogic(), millisecondsdelay);
-            return Ok(new { status = scopedProcessingService.GetServiceStatus() });
-        }
-
-
+        /// <summary>
+        /// Выключение запущенного воркера
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("Cancel")]
         public ActionResult CancelWork()
         {
@@ -61,7 +67,10 @@ namespace RequesterService.Controllers
             return Ok(new { status = scopedProcessingService.GetServiceStatus() });
         }
 
-
+        /// <summary>
+        /// Статус сервиса
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("Status")]
         public ActionResult ServiceStatus()
         {

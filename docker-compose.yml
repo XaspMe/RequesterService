@@ -6,7 +6,7 @@ services:
     environment:
       ACCEPT_EULA: Y
     ports:
-      - 1488:80
+      - 1441:80
     
   requesterservice:
     image: ${DOCKER_REGISTRY-}requesterservice

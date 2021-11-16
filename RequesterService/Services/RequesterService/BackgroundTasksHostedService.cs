@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RequesterService.Exeptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace RequesterService.Services.RequesterService
 {
     public interface IScopedProcessingService
     {
-        Task Run(Action action, int millisecondsdelay);
+        void Run(Action action, int millisecondsdelay);
         void Stop();
         string GetServiceStatus();
     }
@@ -28,10 +29,10 @@ namespace RequesterService.Services.RequesterService
             return Runner == null ? "Deactivated and suspended" : "Аctivated and launched";
         }
 
-        async Task IScopedProcessingService.Run(Action action, int millisecondsdelay)
+        void IScopedProcessingService.Run(Action action, int millisecondsdelay)
         {
-            if (Runner == null)
-                Runner = Task.Run(() => taskToRunAsync(action, millisecondsdelay));
+            if (Runner != null) throw new RunningRequesterAlreadyStartedExeption("Requester already started, run cancelation before create new instance.");
+            else Runner = Task.Run(() => taskToRunAsync(action, millisecondsdelay));
         }
 
         private async Task taskToRunAsync(Action action, int millisecondsdelay)
@@ -61,11 +62,6 @@ namespace RequesterService.Services.RequesterService
         public BackgroundTasksHostedService(ILogger<BackgroundTasksHostedService> logger)
         {
             this.logger = logger;
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

@@ -11,13 +11,12 @@ namespace RequesterService.Services.RequesterStrategy
     {
         public static void AddRequestStrategies(this IServiceCollection services)
         {
-            // Контекст вызова стратегии
+            // Add context of strategy
             services.AddScoped<RequesterStrategyContext>();
 
-            // Добавляем конкретные реализации
+            // Add concrete implementation of strategies
             services.AddScoped<ConcreteRequesterStrategyGet>();
             services.AddScoped<ConcreteRequesterStrategyPost>();
-            services.AddScoped<ConcreteRequesterLongCompletionExample>();
         }
     }
 }

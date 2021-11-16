@@ -12,7 +12,7 @@ namespace RequesterService.Services.RequesterStrategy.ConcreteStrategy
 
         public ConcreteRequesterStrategyPost(ILogger<ConcreteRequesterStrategyPost> logger)
         {
-                this.logger = logger;
+            this.logger = logger;
         }
 
         public Action DoSomeAction() => new Action(() => logger.LogInformation("Some POST action"));

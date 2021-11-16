@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RequesterService</name>
+    </assembly>
+    <members>
+        <member name="M:RequesterService.Controllers.RequesterController.CreateGetRequestAndRun(System.Int32,RequesterService.Services.RequesterStrategy.ConcreteStrategy.ConcreteRequesterStrategyGet)">
+            <summary>
+            Создать простой запрос (условный GET)
+            </summary>
+            <param name="millisecondsdelay"></param>
+            <param name="strategyGet"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RequesterService.Controllers.RequesterController.CreatePostRequestAndRun(System.Int32,RequesterService.Services.RequesterStrategy.ConcreteStrategy.ConcreteRequesterStrategyPost)">
+            <summary>
+            Создать простой запрос (условный POST)
+            </summary>
+            <param name="millisecondsdelay"></param>
+            <param name="strategyPost"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RequesterService.Controllers.RequesterController.CreateBadCompletion(System.Int32,RequesterService.Services.RequesterStrategy.ConcreteStrategy.ConcreteRequesterExeptionExample)">
+            <summary>
+            Пример обработки и логирования ошибок (обработку можно любую повесить)
+            </summary>
+            <param name="millisecondsdelay"></param>
+            <param name="completionExeptionExample"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RequesterService.Controllers.RequesterController.CancelWork">
+            <summary>
+            Выключение запущенного воркера
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RequesterService.Controllers.RequesterController.ServiceStatus">
+            <summary>
+            Статус сервиса
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
