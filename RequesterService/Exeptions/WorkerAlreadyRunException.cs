@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace RequesterService.Exeptions
 {
-    public class RunningRequesterAlreadyStartedExeption : Exception
+    public class WorkerAlreadyRunException : Exception
     {
-        public RunningRequesterAlreadyStartedExeption(string message)
+        public WorkerAlreadyRunException(string message)
         : base(message)
         {
         }

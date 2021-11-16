@@ -15,7 +15,6 @@ namespace RequesterService.Controllers
     [ApiController]
     public class RequesterController : ControllerBase
     {
-        readonly ILogger<RequesterController> logger;
         readonly IScopedProcessingService scopedProcessingService;
         readonly RequesterStrategyContext requesterStrategyContext;
 
@@ -25,7 +24,6 @@ namespace RequesterService.Controllers
         {
             this.requesterStrategyContext = requesterStrategyContext;
             this.scopedProcessingService = scopedProcessingService;
-            this.logger = logger;
         }
 
         /// <summary>
@@ -38,7 +36,7 @@ namespace RequesterService.Controllers
         public ActionResult CreateGetRequestAndRun([FromQuery] int millisecondsdelay, [FromServices] ConcreteRequesterStrategyGet strategyGet)
         {
             requesterStrategyContext.SetStrategy(strategyGet);
-            scopedProcessingService.Run(requesterStrategyContext.DoSomeBusinessLogic(), millisecondsdelay);
+            scopedProcessingService.Run(requesterStrategyContext.GetConcreteAction(), millisecondsdelay);
             return Ok(new { status = scopedProcessingService.GetServiceStatus() });
         }
 
@@ -52,7 +50,7 @@ namespace RequesterService.Controllers
         public ActionResult CreatePostRequestAndRun([FromQuery] int millisecondsdelay, [FromServices] ConcreteRequesterStrategyPost strategyPost)
         {
             requesterStrategyContext.SetStrategy(strategyPost);
-            scopedProcessingService.Run(requesterStrategyContext.DoSomeBusinessLogic(), millisecondsdelay);
+            scopedProcessingService.Run(requesterStrategyContext.GetConcreteAction(), millisecondsdelay);
             return Ok(new { status = scopedProcessingService.GetServiceStatus() });
         }
 
@@ -74,7 +72,11 @@ namespace RequesterService.Controllers
         [HttpGet("Status")]
         public ActionResult ServiceStatus()
         {
-            return Ok(new { status = scopedProcessingService.GetServiceStatus() });
+            return Ok(new
+            {
+                status = scopedProcessingService.GetServiceStatus(),
+                iterationCount = scopedProcessingService.GetCurrentIterationCount()
+            });
         }
     }
 }

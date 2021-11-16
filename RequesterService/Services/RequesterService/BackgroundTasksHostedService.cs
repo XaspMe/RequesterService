@@ -14,49 +14,57 @@ namespace RequesterService.Services.RequesterService
         void Run(Action action, int millisecondsdelay);
         void Stop();
         string GetServiceStatus();
+        int GetCurrentIterationCount();
     }
 
     public class BackgroundTasksHostedService : IScopedProcessingService, IHostedService
     {
         int executionCount = 0;
         readonly ILogger<BackgroundTasksHostedService> logger;
-        CancellationTokenSource cancelSource;
-        CancellationToken stoppingToken;
-        private Task Runner;
+        CancellationTokenSource cts;
+        CancellationToken ct;
+        private Task Worker;
 
         public string GetServiceStatus()
         {
-            return Runner == null ? "Deactivated and suspended" : "Аctivated and launched";
+            return Worker == null ? "Deactivated and suspended" : "Аctivated and launched";
+        }
+
+        public int GetCurrentIterationCount()
+        {
+            return executionCount;
         }
 
         void IScopedProcessingService.Run(Action action, int millisecondsdelay)
         {
-            if (Runner != null) throw new RunningRequesterAlreadyStartedExeption("Requester already started, run cancelation before create new instance.");
-            else Runner = Task.Run(() => taskToRunAsync(action, millisecondsdelay));
+            if (Worker != null) throw new WorkerAlreadyRunException("Worker already started, run cancelation before create new instance.");
+            else Worker = Task.Run(() => taskToRunAsync(action, millisecondsdelay));
         }
 
         private async Task taskToRunAsync(Action action, int millisecondsdelay)
         {
-            cancelSource = new CancellationTokenSource();
-            stoppingToken = cancelSource.Token;
-            while (!stoppingToken.IsCancellationRequested)
+            cts = new CancellationTokenSource();
+            ct = cts.Token;
+            logger.LogInformation($"Worker launched");
+
+            while (!ct.IsCancellationRequested)
             {
+                #pragma warning disable CS4014
                 Task.Run(action);
+                #pragma warning restore CS4014 
                 executionCount++;
-                logger.LogInformation($"Worker launched. {executionCount}");
-                await Task.Delay(millisecondsdelay, stoppingToken);
+                await Task.Delay(millisecondsdelay, ct);
             }            
         }
 
         void IScopedProcessingService.Stop()
         {
-            if (Runner != null)
+            if (Worker != null)
             {
-                cancelSource.Cancel();
+                cts.Cancel();
                 logger.LogInformation("The worker terminated");
-                Runner = null;
+                Worker = null;
             }
-                
         }
 
         public BackgroundTasksHostedService(ILogger<BackgroundTasksHostedService> logger)

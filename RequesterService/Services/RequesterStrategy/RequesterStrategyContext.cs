@@ -15,9 +15,9 @@ namespace RequesterService.Services
             this.strategy = strategy;
         }
 
-        public Action DoSomeBusinessLogic()
+        public Action GetConcreteAction()
         {
-            return strategy.DoSomeAction();
+            return strategy.ActionForRepeat();
         }
     }
 }

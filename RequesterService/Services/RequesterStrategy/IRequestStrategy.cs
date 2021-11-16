@@ -7,6 +7,6 @@ namespace RequesterService.Services.RequesterStrategy
 {
     public interface IRequestStrategy
     {
-        public Action DoSomeAction();
+        public Action ActionForRepeat();
     }
 }

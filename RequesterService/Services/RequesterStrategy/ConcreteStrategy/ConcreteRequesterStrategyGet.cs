@@ -15,6 +15,6 @@ namespace RequesterService.Services.RequesterStrategy.ConcreteStrategy
             this.logger = logger;
         }
 
-        public Action DoSomeAction() => new Action(() => logger.LogInformation("Some GET action"));
+        public Action ActionForRepeat() => new Action(() => logger.LogInformation("Some GET action"));
     }
 }

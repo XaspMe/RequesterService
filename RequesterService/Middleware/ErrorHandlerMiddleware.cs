@@ -35,7 +35,7 @@ namespace RequesterService.Middleware
 
                 switch (error)
                 {
-                    case RunningRequesterAlreadyStartedExeption e:
+                    case WorkerAlreadyRunException e:
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
                     default:
