@@ -25,7 +25,6 @@ namespace RequesterService
                                         .Enrich.FromLogContext()
                                         .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Debug)
                                         .WriteTo.Console()
-                                        .WriteTo.Seq("http://seq/")
                                         .CreateLogger();
 
                 CreateHostBuilder(args).Build().Run();
