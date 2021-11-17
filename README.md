@@ -1,13 +1,9 @@
 # RequesterService
-The application allows you to perform any network action with the required delay.
-Application present .NET5 WebApi with Swagger and SEQ system in docker.
+The application allows you to perform any action with the required delay by adding it into the strategy.
+Application present .NET5 WebApi with Swagger and logging.
 
 To run application:
 1) Run docker-compose from app root. 
-
-It's load SEQ system for log collection on http://localhost:1441/#/events 
-
-You can change external SEQ port in docker-compose.yml
 
 By default application open SwaggerUI in your default browser. Swagger contain russian comments
 
@@ -19,7 +15,8 @@ Creation of recurring tasks requires the creation of a new action:
 
 All examples of creating new actions countains in existing controllers.
 
-Using:
-1) POST /api/Requester/RunGet or /api/Requester/RunPost - for creating new recurrenced task. And do not forget to set dalay between iterations with body of request (Limit 1000ms).
-2) Use POST /api/Requester/Cancel - for canceling.
-3) Use GET /api/Requester/Status - for current status of worker service.
+Using example:
+1) POST /api/Requester/RunGet or /api/Requester/RunPost - for creating new recurrenced task. And do not forget to set dalay between iterations with body of request (minimal limit - 1000ms).
+2) POST /api/Requester/Cancel - for canceling.
+3) GET /api/Requester/Status - for current status of worker service.
+4) The logging level can be changed in Program.Main
