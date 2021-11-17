@@ -48,16 +48,14 @@ namespace RequesterService.Services.RequesterService
 
             cts = new CancellationTokenSource();
             ct = cts.Token;
-            logger.LogInformation($"Worker launched");
+            logger.LogInformation("Worker launched");
 
             while (!ct.IsCancellationRequested)
             {
-                #pragma warning disable CS4014
-                Task.Run(action);
-                #pragma warning restore CS4014 
-                executionCount++;
-                await Task.Delay(millisecondsdelay, ct);
-            }            
+                await Task.Factory.StartNew(action, TaskCreationOptions.LongRunning);
+                Interlocked.Increment(ref executionCount);
+                await Task.Delay(millisecondsdelay);
+            }
         }
 
         void IScopedProcessingService.Stop()
