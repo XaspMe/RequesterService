@@ -1,9 +1,9 @@
 # RequesterService
 The application allows you to perform any action with the required delay by adding it into the strategy.
 
-Application present .NET5 WebApi with Swagger and logging.
+Application present .NET5 WebApi with Swagger and logging on Serilog extensions.
 
-By default application open SwaggerUI in your default browser. Swagger contain russian comments
+By default application open SwaggerUI in your default browser. Swagger contain russian comments.
 
 Creation of recurring tasks requires the creation of a new action:
 1) Create a "concretestrategy" and inherite it from IRequestStrategy.
