@@ -1,9 +1,7 @@
 # RequesterService
 The application allows you to perform any action with the required delay by adding it into the strategy.
-Application present .NET5 WebApi with Swagger and logging.
 
-To run application:
-1) Run docker-compose from app root. 
+Application present .NET5 WebApi with Swagger and logging.
 
 By default application open SwaggerUI in your default browser. Swagger contain russian comments
 
